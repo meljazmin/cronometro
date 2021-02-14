@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cronometro{
+            border: 1px solid pink;
+            font-weight: bold;
+            width: 10%;
+            text-align: center;
+            font-size: 16px;
+        }
+        button{
+            width: 5%;
+            color: teal;
+            font-size: 16px; 
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="cronometro">
+        00 : 00 : 00
+    </div>
+    <button type="button" onclick="start()">
+        Start
+    </button>
+    <button type="button" onclick="stop()">
+        Stop
+    </button>
+
+
+
+    <script>
+        //Esto lo pensó Brian Silva
+        let horas = 0;
+        let minutos = 0;
+        let segundos = 0;
+        let llamandoASetInterval;
+        let marcha = false;
+
+        function start() {
+            console.log('Arrancó');
+            function motor() {
+                segundos++;
+                if (segundos > 60) {
+                    segundos = 0;
+                    minutos++;
+                    if (minutos > 60) {
+                        minutos = 0;
+                        horas++;
+                    }
+                }
+                let cronometro = horas + ":" + minutos + ":" + segundos;
+                let cronometroElem = document.getElementById("cronometro");
+                cronometroElem.innerHTML = cronometro;
+            }
+            
+            if(!marcha){
+                llamandoASetInterval = setInterval(motor, 1000);
+                marcha= true; 
+            }
+
+        }
+
+        function stop() {
+            clearInterval(llamandoASetInterval);
+            marcha = false; 
+            console.log('Paró');
+        }
+    </script>
+</body>
+
+</html>
